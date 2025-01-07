@@ -3,10 +3,9 @@ package com.projects.payments_app_demo.controller;
 import com.projects.payments_app_demo.dtos.Payment;
 import com.projects.payments_app_demo.service.PaymentsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payments")
@@ -15,8 +14,16 @@ public class PaymentsController {
 
     private final PaymentsService paymentsService;
 
-    @GetMapping
-    public ResponseEntity<Payment> getPayments() {
-        return ResponseEntity.ok(paymentsService.getPayment());
+    @GetMapping("/{id}")
+    public ResponseEntity<Payment> getPayments(@PathVariable String id) {
+        return ResponseEntity.ok(paymentsService.getPayment(id));
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> createPayment(@RequestBody Payment payment) {
+        paymentsService.savePayment(payment);
+        return ResponseEntity.noContent().build();
+    }
+
 }

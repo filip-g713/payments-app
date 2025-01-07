@@ -1,20 +1,21 @@
 package com.projects.payments_app_demo.service;
 
 import com.projects.payments_app_demo.dtos.Payment;
+import com.projects.payments_app_demo.repository.PaymentsRedisRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-
 @Service
+@AllArgsConstructor
 public class PaymentsService {
 
-    public Payment getPayment() {
-        return Payment.builder()
-                .id("id1")
-                .amount(new BigDecimal(1234))
-                .fromAccount("fromAccount")
-                .toAccount("toAccount")
-                .instant(true)
-                .build();
+    private final PaymentsRedisRepository paymentsRedisRepository;
+
+    public Payment getPayment(String id) {
+        return paymentsRedisRepository.getPaymentById(id);
+    }
+
+    public void savePayment(Payment payment) {
+        paymentsRedisRepository.savePayment(payment);
     }
 }
