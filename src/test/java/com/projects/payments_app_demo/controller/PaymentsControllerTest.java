@@ -33,7 +33,7 @@ class PaymentsControllerTest {
     }
 
     @Test
-    void getPaymentsShouldBe200() throws Exception {
+    void getPaymentByIdShouldBe200() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/payments/id1"))
                 .andExpect(status().isOk());
     }
