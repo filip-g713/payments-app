@@ -1,9 +1,10 @@
 package com.projects.paymentsapp.service;
 
-import com.projects.paymentsapp.dtos.Payment;
-import com.projects.paymentsapp.repository.PaymentsRedisRepository;
+
+import dtos.Payment;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import repository.PaymentsRedisRepository;
 
 import java.util.List;
 

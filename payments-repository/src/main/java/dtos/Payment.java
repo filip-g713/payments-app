@@ -1,4 +1,4 @@
-package com.projects.paymentsapp.dtos;
+package dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

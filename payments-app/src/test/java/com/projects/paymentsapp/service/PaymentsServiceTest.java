@@ -1,13 +1,14 @@
 package com.projects.paymentsapp.service;
 
-import com.projects.paymentsapp.dtos.Payment;
-import com.projects.paymentsapp.repository.PaymentsRedisRepository;
+
+import dtos.Payment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import repository.PaymentsRedisRepository;
 
 import java.util.Optional;
 
