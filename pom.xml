@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.projects</groupId>
-	<artifactId>payments-app</artifactId>
+	<artifactId>payments</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>payments-app</name>
+	<packaging>pom</packaging>
+	<name>payments</name>
 	<description>Demo project for payments application</description>
 	<url/>
 	<licenses>
@@ -20,6 +21,9 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>payments-repository</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
@@ -104,6 +108,13 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>
