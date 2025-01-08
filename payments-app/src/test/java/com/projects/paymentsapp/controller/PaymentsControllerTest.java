@@ -1,6 +1,6 @@
 package com.projects.paymentsapp.controller;
 
-import com.projects.payments_app_demo.service.PaymentsService;
+import com.projects.paymentsapp.service.PaymentsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

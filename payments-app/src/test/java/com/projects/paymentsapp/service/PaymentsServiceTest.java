@@ -1,7 +1,7 @@
 package com.projects.paymentsapp.service;
 
-import com.projects.payments_app_demo.dtos.Payment;
-import com.projects.payments_app_demo.repository.PaymentsRedisRepository;
+import com.projects.paymentsapp.dtos.Payment;
+import com.projects.paymentsapp.repository.PaymentsRedisRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
