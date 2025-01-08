@@ -27,7 +27,7 @@ public class PaymentsController {
 
     @PostMapping
     public ResponseEntity<Void> savePayment(@RequestBody Payment payment) {
-        paymentsService.savePayment(payment);
+        paymentsService.saveAndSchedulePayment(payment);
         return ResponseEntity.noContent().build();
     }
 

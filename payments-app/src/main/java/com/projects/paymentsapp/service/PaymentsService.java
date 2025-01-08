@@ -13,13 +13,19 @@ import java.util.List;
 public class PaymentsService {
 
     private final PaymentsRedisRepository paymentsRedisRepository;
+    private final PaymentsJobService paymentsJobService;
 
     public Payment getPayment(String id) {
         return paymentsRedisRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public void savePayment(Payment payment) {
-        paymentsRedisRepository.save(payment);
+    public void saveAndSchedulePayment(Payment payment) {
+        payment = paymentsRedisRepository.save(payment);
+        if (payment.isInstant()) {
+            paymentsJobService.scheduleInstantPayment(payment);
+        } else {
+            paymentsJobService.schedulePaymentJob(payment);
+        }
     }
 
     public List<Payment> getPayments() {
