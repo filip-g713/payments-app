@@ -1,4 +1,4 @@
-package com.projects.payments_app_demo.service;
+package com.projects.paymentsapp.service;
 
 import com.projects.payments_app_demo.dtos.Payment;
 import com.projects.payments_app_demo.repository.PaymentsRedisRepository;

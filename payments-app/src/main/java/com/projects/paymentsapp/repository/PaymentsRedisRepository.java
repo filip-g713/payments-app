@@ -1,6 +1,6 @@
-package com.projects.payments_app_demo.repository;
+package com.projects.paymentsapp.repository;
 
-import com.projects.payments_app_demo.dtos.Payment;
+import com.projects.paymentsapp.dtos.Payment;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

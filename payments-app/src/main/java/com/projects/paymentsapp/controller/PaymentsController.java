@@ -1,9 +1,8 @@
-package com.projects.payments_app_demo.controller;
+package com.projects.paymentsapp.controller;
 
-import com.projects.payments_app_demo.dtos.Payment;
-import com.projects.payments_app_demo.service.PaymentsService;
+import com.projects.paymentsapp.dtos.Payment;
+import com.projects.paymentsapp.service.PaymentsService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
