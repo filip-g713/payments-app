@@ -6,5 +6,4 @@ public class DateValidationException extends Exception {
         super(message);
     }
 
-    public DateValidationException() {}
 }

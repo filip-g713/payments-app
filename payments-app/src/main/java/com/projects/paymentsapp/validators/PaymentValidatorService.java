@@ -8,7 +8,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import repository.AccountRepository;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Service
@@ -24,24 +23,13 @@ public class PaymentValidatorService {
         try {
             validatePayment(payment);
             validatePaymentAccounts(payment);
-            if (EMPTY_SCHEDULED_FOR_VALUE.equals(payment.getScheduledFor())) {
-                validateInstantPayment(payment);
-            } else {
-                validateScheduledPayment(payment);
-            }
+            validateBalance(payment);
+            validateDateForScheduledPayment(payment);
             return true;
         } catch (PaymentValidationException | DateValidationException e) {
-            log.error("Payment validation failed, reson: {}", e.getMessage());
+            log.error("Payment validation failed, reason: {}", e.getMessage());
         }
         return false;
-    }
-
-    public void validateInstantPayment(Payment payment) throws PaymentValidationException {
-        validateBalance(payment);
-    }
-
-    public void validateScheduledPayment(Payment payment) throws DateValidationException {
-        validateDateForScheduledPayment(payment);
     }
 
     private void validateDateForScheduledPayment(Payment payment) throws DateValidationException {

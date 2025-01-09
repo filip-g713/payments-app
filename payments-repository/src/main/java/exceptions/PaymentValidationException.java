@@ -1,6 +1,7 @@
 package exceptions;
 
 public class PaymentValidationException extends Exception {
-    public PaymentValidationException() {}
-    public PaymentValidationException(String message) {}
+    public PaymentValidationException(String message) {
+        super(message);
+    }
 }
