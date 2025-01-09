@@ -36,6 +36,12 @@ public class PaymentsService {
         paymentsJobServiceFactory.getPaymentsJobService(InstantPaymentsJobService.BEAN_ID).createPaymentJob(payment);
     }
 
+    public void cancelPayment(String jobId) {
+        PaymentJobUnit paymentJob = paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID)
+                .getPaymentJob(jobId);
+        paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID).cancelPaymentJob(jobId);
+        paymentsRedisRepository.deleteById(paymentJob.getPaymentId());
+    }
     private Payment createPayment(Payment payment) {
         log.info("Creating payment {}", payment);
         return paymentsRedisRepository.save(payment);
@@ -45,10 +51,4 @@ public class PaymentsService {
         accountsService.freezeAccountBalanceForPayment(payment);
     }
 
-    public void cancelPayment(String jobId) {
-        PaymentJobUnit paymentJob = paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID)
-                .getPaymentJob(jobId);
-        paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID).cancelPaymentJob(jobId);
-        paymentsRedisRepository.deleteById(paymentJob.getPaymentId());
-    }
 }
