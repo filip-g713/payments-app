@@ -4,9 +4,12 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,10 +19,8 @@ import java.io.Serializable;
 public class PaymentJobUnit implements Serializable {
     @Id
     private String id;
-    @Reference
     @NonNull
-    private Payment payment;
+    private String paymentId;
     @Indexed
-    private String completed;
-    private String success;
+    long scheduledFor;
 }

@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repository.PaymentsRedisRepository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -24,7 +25,13 @@ class PaymentsServiceTest {
 
     @Test
     void getPayment() {
-        when(paymentsRedisRepository.findById("id1")).thenReturn(Optional.ofNullable(Payment.builder().id("id1").build()));
+        when(paymentsRedisRepository.findById("id1")).thenReturn(Optional.ofNullable(Payment.builder()
+                .id("id1")
+                .fromAccountId("fromAccountId")
+                .toAccountId("toAccountId")
+                .amount(1234)
+                .build())
+        );
         Assertions.assertEquals("id1", paymentsService.getPayment("id1").getId());
     }
 }

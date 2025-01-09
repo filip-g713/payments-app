@@ -1,7 +1,6 @@
 package repository;
 
 import dtos.PaymentJobUnit;
-import lombok.AllArgsConstructor;
 import org.redisson.Redisson;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RedissonClient;

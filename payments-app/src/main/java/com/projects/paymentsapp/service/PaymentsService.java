@@ -6,37 +6,27 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import repository.PaymentsRedisRepository;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Service
 @AllArgsConstructor
 public class PaymentsService {
 
     private final PaymentsRedisRepository paymentsRedisRepository;
-    private final PaymentsJobService paymentsJobService;
+    private final PaymentsJobServiceFactory paymentsJobServiceFactory;
 
     public Payment getPayment(String id) {
         return paymentsRedisRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public void saveAndSchedulePayment(Payment payment) {
+    public void saveScheduledPayment(Payment payment) {
         payment = paymentsRedisRepository.save(payment);
-        if (payment.isInstant()) {
-            paymentsJobService.scheduleInstantPayment(payment);
-        } else {
-            paymentsJobService.schedulePaymentJob(payment);
-        }
+        paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID).createPaymentJob(payment);
     }
 
-    public List<Payment> getPayments() {
-        return (List<Payment>) paymentsRedisRepository.findAll();
-    }
-
-    public void deletePaymentById(String id) {
-        paymentsRedisRepository.deleteById(id);
-    }
-
-    public void deletePayments() {
-        paymentsRedisRepository.deleteAll();
+    public void saveInstantPayment(Payment payment) {
+        payment.setScheduledFor(LocalDate.now().toEpochDay());
+        payment = paymentsRedisRepository.save(payment);
+        paymentsJobServiceFactory.getPaymentsJobService(InstantPaymentsJobService.BEAN_ID).createPaymentJob(payment);
     }
 }
