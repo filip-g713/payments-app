@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import repository.AccountRepository;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AccountsService {
@@ -20,5 +22,13 @@ public class AccountsService {
         Account account = accountRepository.findById(payment.getFromAccountId()).get();
         account.setBalance(account.getBalance() - payment.getAmount());
         save(account);
+    }
+
+    public List<Account> getAllAccounts() {
+        return (List<Account>) accountRepository.findAll();
+    }
+
+    public void deleteById(String id) {
+        accountRepository.deleteById(id);
     }
 }

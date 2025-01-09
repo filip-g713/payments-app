@@ -38,4 +38,9 @@ public class PaymentsController {
         return ResponseEntity.created(URI.create("/payments-app/payments/scheduled")).build();
     }
 
+    @DeleteMapping("/cancel/{jobId}")
+    public ResponseEntity<Void> cancelPayment(@PathVariable String jobId) {
+        paymentsService.cancelPayment(jobId);
+        return ResponseEntity.ok().build();
+    }
 }

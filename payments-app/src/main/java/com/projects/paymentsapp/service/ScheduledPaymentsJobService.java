@@ -18,11 +18,22 @@ public class ScheduledPaymentsJobService implements PaymentsJobService {
 
     @Override
     public void createPaymentJob(Payment payment) {
-        paymentJobRedisRepository.save(PaymentJobUnit.builder()
+        PaymentJobUnit paymentJobUnit = PaymentJobUnit.builder()
                 .paymentId(payment.getId())
                 .scheduledFor(payment.getScheduledFor())
-                .build()
+                .build();
+        paymentJobRedisRepository.save(paymentJobUnit
         );
-        log.info("Created scheduled Payment Job for payment {}", payment.getId());
+        log.info("Created scheduled Payment Job {} for payment {}",paymentJobUnit.getId(), payment.getId());
+    }
+
+    @Override
+    public void cancelPaymentJob(String id) {
+        paymentJobRedisRepository.deleteById(id);
+    }
+
+    @Override
+    public PaymentJobUnit getPaymentJob(String id) {
+       return paymentJobRedisRepository.findById(id).orElseThrow(() -> new RuntimeException("Payment Job not found"));
     }
 }

@@ -2,6 +2,7 @@ package com.projects.paymentsapp.service;
 
 
 import dtos.Payment;
+import dtos.PaymentJobUnit;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,12 @@ public class PaymentsService {
 
     private void freezePaymentAmount(Payment payment) {
         accountsService.freezeAccountBalanceForPayment(payment);
+    }
+
+    public void cancelPayment(String jobId) {
+        PaymentJobUnit paymentJob = paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID)
+                .getPaymentJob(jobId);
+        paymentsJobServiceFactory.getPaymentsJobService(ScheduledPaymentsJobService.BEAN_ID).cancelPaymentJob(jobId);
+        paymentsRedisRepository.deleteById(paymentJob.getPaymentId());
     }
 }

@@ -25,4 +25,15 @@ public class InstantPaymentsJobService implements PaymentsJobService {
         log.info("Created instant payment job for payment {}", payment.getId());
         log.info("Queue size: {}", instantPaymentQueue.getQueue().size());
     }
+
+    @Override
+    public void cancelPaymentJob(String id) {
+        log.error("Cancelling instant payment not available");
+    }
+
+    @Override
+    public PaymentJobUnit getPaymentJob(String id) {
+        log.error("Not implemented yet");
+        return null;
+    }
 }
