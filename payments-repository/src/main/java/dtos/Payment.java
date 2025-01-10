@@ -1,14 +1,12 @@
 package dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,9 +17,12 @@ import java.time.LocalDateTime;
 public class Payment implements Serializable {
     @Id
     String id;
-    String fromAccount;
-    String toAccount;
-    BigDecimal amount;
-    LocalDateTime scheduledFor;
-    boolean instant;
+    @NonNull
+    String fromAccountId;
+    @NonNull
+    String toAccountId;
+    double amount;
+    long scheduledFor;
+    private String completed;
+    private String success;
 }

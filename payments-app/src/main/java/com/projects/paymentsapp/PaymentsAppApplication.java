@@ -7,7 +7,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 
 @SpringBootApplication
 @EnableRedisRepositories(basePackages = {"repository"})
-@ComponentScan({"repository", "com.projects.paymentsapp.controller", "com.projects.paymentsapp.service"})
+@ComponentScan({"repository", "com.projects.paymentsapp.controller", "com.projects.paymentsapp.service", "com.projects.paymentsapp.validators"})
 public class PaymentsAppApplication {
 
     public static void main(String[] args) {

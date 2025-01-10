@@ -1,7 +1,6 @@
 package repository;
 
 import dtos.PaymentJobUnit;
-import lombok.AllArgsConstructor;
 import org.redisson.Redisson;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RedissonClient;
@@ -20,11 +19,7 @@ public class InstantPaymentQueue {
         queue = redisson.getBlockingQueue("instantPaymentsQueue");
     }
 
-    public PaymentJobUnit getNext() {
-        return queue.poll();
-    }
-
-    public void putNext(PaymentJobUnit paymentJobUnit) {
-        queue.offer(paymentJobUnit);
+    public RBlockingQueue<PaymentJobUnit> getQueue() {
+        return queue;
     }
 }

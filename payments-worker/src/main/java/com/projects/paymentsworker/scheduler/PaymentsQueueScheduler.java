@@ -10,19 +10,19 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class PaymentsQueueScheduler {
 
-    private final  PaymentsSchedulerService paymentsSchedulerService;
+    private final PaymentsExecutorService paymentsExecutorService;
 
-    @Scheduled(fixedDelay = 15 * 60 * 1000)
+    @Scheduled(fixedDelay =  30 * 1000)
     private void processScheduledPayments() {
         log.info("Scheduling payments");
-        paymentsSchedulerService.processScheduledPayments();
+        paymentsExecutorService.processScheduledPayments();
         log.info("Finished scheduling payments");
     }
 
     @Scheduled(fixedDelay = 30 * 1000)
     private void processInstantPayments() {
         log.info("Scheduling instant payments");
-        paymentsSchedulerService.processInstantPayments();
+        paymentsExecutorService.processInstantPayments();
         log.info("Finished scheduling instant payments");
     }
 }
