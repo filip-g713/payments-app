@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import repository.PaymentsRedisRepository;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
